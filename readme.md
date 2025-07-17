@@ -57,7 +57,7 @@ Clone or download this repo, then install the requirements:
 
 ```bash
 git clone https://github.com/b3agz/Pollinations.git
-cd pollinations.py
+cd pollinations
 pip install -r requirements.txt
 ```
 
