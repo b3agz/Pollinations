@@ -15,6 +15,8 @@ POLLINATIONS_API_URL = "https://text.pollinations.ai/openai"        # The API UR
 POLLINATIONS_MODELS = "https://text.pollinations.ai/models"         # The API URL for listing models
 POLLINATIONS_API_KEY = ""                                           # Your API key (optional, you can get one for free at https://auth.pollinations.ai/)
 
+# IF YOU PLAN TO USE THIS CODE AND RELEASE IT, DO NOT PUT YOUR API KEY IN THE CODE!!!
+
 def ask(
     prompt,                                                         # The prompt for the AI model.
     system_message="You are a helpful AI assistant.",               # System message to set the context for the AI (optional)
