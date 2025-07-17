@@ -56,7 +56,7 @@ optional arguments:
 Clone or download this repo, then install the requirements:
 
 ```bash
-git clone https://github.com/b3agz/pollinations.py.git
+git clone https://github.com/b3agz/Pollinations.git
 cd pollinations.py
 pip install -r requirements.txt
 ```
