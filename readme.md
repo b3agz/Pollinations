@@ -59,3 +59,8 @@ Clone or download this repo, then install the requirements:
 git clone https://github.com/b3agz/pollinations.py.git
 cd pollinations.py
 pip install -r requirements.txt
+```
+
+## License
+
+MIT License. See [LICENSE](LICENSE) for details.
