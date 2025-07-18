@@ -2,10 +2,9 @@
 
 A simple, ready-to-use Python client for the [Pollinations.ai](https://pollinations.ai) API.
 
-Talk to LLMs with a command-line interface, or use the `ask()` function directly in your own scripts. Can be used with with just a prompt and the default settings or you can set your own settings as needed (see below).
+Provides a `Pollinations()` class that can be created and called at runtime using either `get_response()` (for a single prompt/response) or `chat()` (for a response with message history context). All of the paramters that Pollinations expose are settable in the initialisation and modifiable using functions like `set_temperature()`, `set_model()`, etc.
 
-Some models are not available for anonymous use, you can get an API key at https://auth.pollinations.ai, just set `POLLINATIONS_API_KEY` to that key and you should be able to access
-models on the appropriate tier.
+Some models are not available for anonymous use, you can get an API key at https://auth.pollinations.ai, and set it either by setting `api_key` when initalising your class or by using `set_api_key()` after initialisation. You can print a list of available models to terminal with `print_model_list()`, or just run `list.py`.
 
 **Please note I AM NOT affiliated with Pollinations.ai, they are not responsible for this script and I am not responsible for their servers. You are responsible for your own usage, however. Pollination.ai are doing a cool thing, don't abuse it.**
 
@@ -13,35 +12,40 @@ models on the appropriate tier.
 
 ## Features
 
-- Query Pollinations LLMs interactively from the terminal
-- Call the `ask()` function from your own Python projects
-- List all available models (and see which ones are free/anonymous)
-- Set system prompts (“context”) for the model
-- Optional parameters for reproducibility, randomness, model, and more
-- Handles retries and rate limits automatically
+- Run `prompt.py` to test out a single prompt.
+- Run `chat.py` to test chat with message history.
+- Run `list.py` to see a list of available models and details.
+- `example.py` shows a basic usage example.
+- All parameters exposed by Pollinations (at the time of writing) can be set.
+- Internally handles message history for chat-like behaviour.
 - No login or API key required for anonymous models (but can use one if you want)
 
-### CLI Options
+### Example Usage
 
 ```bash
-usage: pollinations.py [-h] [--list] [--system-message MSG] [--model MODEL]
-                       [--temperature N] [--max-tokens N] [--seed N]
-                       [--private N] [--max-tries N] [--delays SECONDS [SECONDS ...]]
+  # Initialise a Pollinations instance. Every parameters can be set on initialisation.
+  llm1 = Pollinations(
+      api_key = "",
+      model = "openai",
+      system_message = "You are a helpful AI assistant.",
+      temperature = 0.7,
+      top_p = 0.9,
+      presence_penalty = 0.0,
+      frequency_penalty = 0.0,
+      as_json = False,
+      max_tokens = 800,
+      seed = None,
+      private = False,
+      timeout = 30
+  )
 
-A script for interacting with Pollinations LLMs.
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --list                List available models. (default: False)
-  --system-message MSG  Optional system message for the AI model. (default: )
-  --model MODEL         Model to use (use --list to see all models). (default: openai)
-  --temperature N       Temperature for randomness. (default: 1)
-  --max-tokens N        Max tokens in the response. (default: 1600)
-  --seed N              Random seed for reproducibility. (default: None)
-  --private N           Hide response from the public feed. (default: False)
-  --max-tries N         Max tries before failing. (default: 3)
-  --delays SECONDS [SECONDS ...]
-                        Delays (in seconds) between retries. (default: [5, 10])
+  # Errors will raise an exception, so it's best to use try and handle exceptions gracefully.
+  try:
+      response = llm1.get_response("Hello, future robot overlord, how are you today?")
+  except PollinationsError as e:
+      response = e
+  
+  print(response)
 ```
 
 ---
